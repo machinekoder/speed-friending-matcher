@@ -5,7 +5,7 @@ from application import Application
 
 @pytest.fixture
 def dummy_app():
-    return Application('', '')
+    return Application('', '', '')
 
 
 def test_parsing_correct_input_plugin_string_works(dummy_app):
@@ -54,6 +54,24 @@ def test_parsing_broken_output_plugin_string_raises_runtimeerror(dummy_app):
 
     try:
         dummy_app._check_and_parse_output_plugin(broken_string)
+        assert False
+    except RuntimeError:
+        assert True
+
+
+def test_parsing_correct_matchmaker_works(dummy_app):
+    correct_string = 'simple'
+
+    matchmaker = dummy_app._check_and_parse_matchmaker(correct_string)
+
+    assert matchmaker is not None
+
+
+def test_parsing_broken_matchmaker_raises_runtimeerror(dummy_app):
+    broken_string = 'extreme'
+
+    try:
+        dummy_app._check_and_parse_matchmaker(broken_string)
         assert False
     except RuntimeError:
         assert True
