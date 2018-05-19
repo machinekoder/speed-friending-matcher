@@ -18,6 +18,7 @@ def testdata():
     data.append(sara)
     data.append(mark)
     data.append(luisa)
+    #data.append(john)
     return data
 
 

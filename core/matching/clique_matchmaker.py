@@ -1,42 +1,41 @@
 # -*- coding: utf-8 -*-
-from core.person import Person
+from .simple_matchmaker import SimpleMatchmaker
 
 
-class CliqueMatchmaker(object):
+class CliqueMatchmaker(SimpleMatchmaker):
     """
     Finds subsets (cliques) in the data bigger than a single two person match.
     """
 
     def __init__(self):
-        self._everyone = {}
+        super(CliqueMatchmaker, self).__init__()
+        self._graph = {}
 
     def run(self, data):
-        self._everyone = {person.number: person for person in data}
+        super(CliqueMatchmaker, self).run(data)
+        self._graph = {person: set(person.results.matches) for person in data}
         for person in data:
-            self._match_person(person, data)
+            self._find_biggest_clique_for_person(person)
 
-    def _match_person(self, person, all_people):
-        if not type(person) is Person:
-            raise TypeError('Can only match a person')
+    def _find_biggest_clique_for_person(self, person, **__):
 
-        matching_set = {person}
-        marked_people = set()
-        for number in person.marked_numbers:
-            try:
-                marked_people.add(self._everyone[number])
-            except KeyError:
-                continue
+        def dfs(graph, start):
+            visited = set()
+            stack = [(start, {start})]
+            longest_path = {start}
+            while stack:
+                (vertex, path) = stack.pop()
+                if vertex not in visited:
+                    # only visit if all in path are friends
+                    if vertex is start or all(v in graph[vertex] for v in path):
+                        visited.add(vertex)
+                        path = set(path).union([vertex])
+                        if len(path) > len(longest_path):
+                            longest_path = path
+                        stack.extend((v, path) for v in (graph[vertex] - visited))
+            return longest_path
 
-        for other_person in marked_people:
-            if self._matches_everyone_in_set_of_people(other_person, matching_set):
-                matching_set.add(other_person)
-        matching_set.remove(person)
+        matches = dfs(self._graph, person)
+        matches.remove(person)
 
-        person.results.matches = matching_set
-
-    @staticmethod
-    def _matches_everyone_in_set_of_people(person, people):
-        for other_person in people:
-            if other_person.number not in person.marked_numbers:
-                return False
-        return True
+        person.results.matches = matches
