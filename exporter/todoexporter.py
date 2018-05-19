@@ -51,10 +51,9 @@ class TodoExporter(Exporter):
                                 'marked': '\n'.join(marked_by_me), 'got_marked': '\n'.join(marked_me),
                                 'matches': '\n'.join(matches)}
 
-    def _create_person_simple_string(self, person):
-        data = []
-        data.append(str(person.number))
-        data.append(person.name)
+    @staticmethod
+    def _create_person_simple_string(person):
+        data = [str(person.number), person.name]
         if person.email is not '':
             data.append(person.email)
         if person.phone is not '':
