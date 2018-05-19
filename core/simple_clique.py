@@ -13,9 +13,7 @@ class SimpleClique(object):
         Args:
           data: A list of Person objects
         """
-        self.everyone = {}
-        for person in data:
-            self.everyone[person.number] = person
+        self.everyone = {person.number: person for person in data}
         for person in data:
             self.seen = set()
             clique = set()

@@ -23,11 +23,11 @@ def testdata():
 
 @pytest.fixture
 def matchmaker():
-    from core.clique import SimpleClique
+    from core.simple_clique import SimpleClique
     return SimpleClique()
 
 
-def test_person_that_has_match_all_flag_matches_only_intersections(matchmaker, testdata):
+def test_clique_matching_matches_everyone_in_the_clique_of_a_person(matchmaker, testdata):
     matchmaker.run(testdata)
 
     tobi, sara, mark, luisa = testdata
@@ -36,12 +36,3 @@ def test_person_that_has_match_all_flag_matches_only_intersections(matchmaker, t
     assert sara in mark.results.matches
     assert luisa not in mark.results.matches
 
-
-def test_person_that_has_not_match_all_flags_matches_only_intersections(matchmaker, testdata):
-    matchmaker.run(testdata)
-
-    tobi, sara, mark, luisa = testdata
-    assert tobi in sara.results.matches
-    assert mark in sara.results.matches
-    assert sara in mark.results.matches
-    assert luisa not in mark.results.matches
