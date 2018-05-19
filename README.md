@@ -13,7 +13,7 @@ sudo pip install -r requirements.txt
 ## How to use it
 Run the speed-friending-matcher from the command line:
 ```
-usage: speed-friending-matcher.py [-h] -i INPUT -o OUTPUT
+usage: speed-friending-matcher.py [-h] -i INPUT -o OUTPUT [-m MATCHMAKER]
 
 Matchmaking application for speed friending events
 
@@ -23,6 +23,8 @@ optional arguments:
                         Input plugin and parameters e.g. csv:somefile.csv
   -o OUTPUT, --output OUTPUT
                         Output plugins and parameters e.g. todo:mytodo.txt
+  -m MATCHMAKER, --matchmaker MATCHMAKER
+                        Matchmaker, simple or clique
 ```
 
 For example:
@@ -38,6 +40,12 @@ For example:
 
 * todo:<filename>.txt: exports a TODO file
 * onexlsx:<filename>.xlsx: exports a single Excel sheet containing matching information
+* clique:<filename>.txt: exports a file containing all found cliques, to be used with the clique matchmaker
+
+## Matchmakers
+
+* simple: Simple I liked you, you liked me matchmaking
+* clique: Finds cliques of people liking each other
 
 ## Extending the software
 You can extend the software by adding new import and export plugins. Take a look the default plugins [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
