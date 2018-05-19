@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from core.person import Person, MatchingFlags
+from core.person import Person
 
 
 class SimpleMatchmaker(object):

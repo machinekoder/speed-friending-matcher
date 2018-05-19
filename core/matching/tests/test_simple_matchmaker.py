@@ -27,17 +27,7 @@ def matchmaker():
     return SimpleMatchmaker()
 
 
-def test_person_that_has_match_all_flag_matches_only_intersections(matchmaker, testdata):
-    matchmaker.run(testdata)
-
-    tobi, sara, mark, luisa = testdata
-    assert tobi in sara.results.matches
-    assert mark in sara.results.matches
-    assert sara in mark.results.matches
-    assert luisa not in mark.results.matches
-
-
-def test_person_that_has_not_match_all_flags_matches_only_intersections(matchmaker, testdata):
+def test_matchmaking_matches_only_intersections_flag_is_ignored(matchmaker, testdata):
     matchmaker.run(testdata)
 
     tobi, sara, mark, luisa = testdata
