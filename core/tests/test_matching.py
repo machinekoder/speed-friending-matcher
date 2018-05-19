@@ -7,13 +7,13 @@ from core.person import Person, MatchingFlags
 def testdata():
     data = []
     tobi = Person(name='Tobi', number=1, email='tobi@gmail.com', phone='0123456789',
-                  marked_numbers=set([2, 3]), flags=MatchingFlags.match_all)
+                  marked_numbers={2, 3}, flags=MatchingFlags.match_all)
     sara = Person(name='Sara Mustermann', number=2, email='', phone='123456789',
-                  marked_numbers=set([1, 4, 3]))
+                  marked_numbers={1, 4, 3})
     mark = Person(name='Mark', number=3, email='mark@mark.com', phone='987654321',
-                  marked_numbers=set([2, 4, 5]))
+                  marked_numbers={2, 4, 5})
     luisa = Person(name='Luisa', number=4, email='', phone='49123456789',
-                   marked_numbers=set([5, 1]), flags=MatchingFlags.match_all)
+                   marked_numbers={5, 1}, flags=MatchingFlags.match_all)
     data.append(tobi)
     data.append(sara)
     data.append(mark)
