@@ -34,18 +34,19 @@ For example:
 
 ## Importer Plugins
 
-* csv:<filename>.csv: imports a CSV file with partipants data
+* **csv:<filename>.csv:** imports a CSV file with partipants data
 
 ## Exporter Plugins
 
-* todo:<filename>.txt: exports a TODO file
-* onexlsx:<filename>.xlsx: exports a single Excel sheet containing matching information
-* clique:<filename>.txt: exports a file containing all found cliques, to be used with the clique matchmaker
+* **todo:<filename>.txt:** exports a TODO file
+* **onexlsx:<filename>.xlsx:** exports a single Excel sheet containing matching information
+* **clique:<filename>.txt:** exports a file containing all found cliques, to be used with the clique matchmaker
+* **graph:<filename>.<png, dot, ...>** exports a graphical representation of the match graph, supports any export formats supported by [GraphViz](https://www.graphviz.org/)
 
 ## Matchmakers
 
-* simple: Simple I liked you, you liked me matchmaking
-* clique: Finds cliques of people liking each other
+* **simple:** Simple I liked you, you liked me matchmaking
+* **clique:** Finds cliques of people liking each other
 
 ## Extending the software
 You can extend the software by adding new import and export plugins. Take a look the default plugins [csvimporter](./importer/csvimporter.py) and [todoexporter](./exporter/todoexporter.py) for more details.
